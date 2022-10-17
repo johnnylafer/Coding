@@ -11,7 +11,7 @@ boolean colorDepth = false;
 boolean mirror = false;
 
 void setup() {
- fullScreen();
+ //fullScreen();
   kinect = new Kinect(this);
   kinect.initDepth();
  // kinect.initVideo();
