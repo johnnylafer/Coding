@@ -27,8 +27,8 @@ PGraphics offscreen;
 void setup() {
   // Keystone will only work with P3D or OPENGL renderers,
   // since it relies on texture mapping to deform
-  fullScreen(P3D);
-  //size(800, 600, P3D);
+  //fullScreen(P3D);
+  size(800, 600, P3D);
 
   ks = new Keystone(this);
   surface = ks.createCornerPinSurface(400, 300, 20);
