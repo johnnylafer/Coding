@@ -113,7 +113,7 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
   //Have the Kinect look at what is in front of it
   //Then define that depth data as a 'brightness' at each pixel
   //Based on the brightness of the pixel, draw a rectangle at that location with the appropriate color
-  PImage img = kinect.getVideoImage();
+  PImage img = kinect.getDepthImage();
   image(img,0,0);  //enable to help align projector
   int tempIndex = 0;
   for (int y = yMin; y < yMax; y += 1){
@@ -135,7 +135,6 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
     noStroke();
     rect(map(x,xMin,xMax,1920,0),map(y,yMin,yMax,0,1080),skip,skip);
     tempIndex++;
-    image(img,0,0);
    }
   }
 

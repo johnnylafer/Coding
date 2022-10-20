@@ -138,7 +138,7 @@ class KinectTracker {
         int rawDepth = depth[offset];
 
         // Testing against threshold
-        if (rawDepth < threshold) {
+        if (rawDepth < threshold && rawDepth > threshold+20) {
           sumX += x;
           sumY += y;
           count++;
@@ -179,7 +179,7 @@ class KinectTracker {
         // Raw depth
         int rawDepth = depth[offset];
         int pix = x + y * display.width;
-        if (rawDepth < threshold) {
+        if (rawDepth < threshold && rawDepth > threshold+20) {
           // A red color instead
           display.pixels[pix] = color(150, 50, 50);
         } else {
@@ -199,10 +199,12 @@ class KinectTracker {
 
    public int getThreshold() {
     return threshold;
+
   }
 
    public void setThreshold(int t) {
     threshold =  t;
+    print(threshold);
   }
 }
 
