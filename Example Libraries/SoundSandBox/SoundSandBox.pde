@@ -1,11 +1,11 @@
 /*
   Music Sequencer for Kinect V2 + Projector
-  
+
   This Processing program matches the data from a Kinect V2 sensor to a projector.
   When circular obejct of a particular height are detected (indicated by a white bar scanning
   across the interactive/projected area) a sound is played.  The pitch of the sound is changed
   by moving the obejct higher or lower in the interactive area.
-  
+
   Johnny Devine 2019
 
 */
@@ -34,7 +34,7 @@ int radius = 8;
 int border = 2;
 float sensitivity = 0.02;
 
-//These are the pixels that define the portion of the Kinect image that should be mapped to the projector   
+//These are the pixels that define the portion of the Kinect image that should be mapped to the projector
 int xMin = 131;
 int xMax = 383;
 int yMin = 147;
@@ -71,16 +71,16 @@ void setup() {
   //size(512, 424);  //This is the number of pixels returend by the kinect by default
   kinect2 = new Kinect(this);
   scanner = new Scanner();
-  
+
   kinect2.initDepth();
 
   lastTime = millis();
   progStartTime = millis();
- 
+
   //Images and sounds used by the program need to be in the same folder or a sub folder named 'data'
   soundfile2 = new SoundFile(this, "harp-short-12.wav");
   //soundfile3 = new SoundFile(this, "harp-short-11.wav");
-  soundfile3 = new SoundFile(this, "harp-short-10.wav");  
+  soundfile3 = new SoundFile(this, "harp-short-10.wav");
   soundfile4 = new SoundFile(this, "chimes-d-3-f-1.wav");
 
 }
@@ -88,7 +88,7 @@ void setup() {
 
 void draw() {
   background(0);
-  
+
   //Have the Kinect look at what is in front of it
   //Then define that depth data as a 'brightness' at each pixel
   //Based on the brightness of the pixel, draw a rectangle at that location with the appropriate color
@@ -99,18 +99,18 @@ void draw() {
    for (int x = xMin; x < xMax; x += 1) {
     int index = x + y * img.width;
     float b = brightness(img.pixels[index]);
-    
+
     //calculate the average of the last three b values.  Slows things down, but makes for less random flashing
     b = (b + bOnePrevious[index] + bTwoPrevious[index])/3;
     bTwoPrevious[index] = bOnePrevious[index];
     bOnePrevious[index] = b;
 
-    
-    
+
+
     pixelColors = colorHandler(b, tempIndex, pixelColors);
     pixelX[tempIndex] = x - xMin;  //subracting min values makes these start at zero
     pixelY[tempIndex] = y - yMin;
-  
+
     noStroke();
     rect(map(x,xMin,xMax,1920,0),map(y,yMin,yMax,0,1080),skip,skip);
     tempIndex++;
@@ -127,13 +127,13 @@ void draw() {
   }
   scanner.playEvents();
   scanner.clearModifiers();
-  
+
 }
 
 
 
 
-//Determine color of rectangle based on brightness of 
+//Determine color of rectangle based on brightness of
 //depth image pixel and monitor event progress
 int[] colorHandler(float b, int i, int[] pixs){
 
@@ -142,20 +142,20 @@ int[] colorHandler(float b, int i, int[] pixs){
      fill(0);
      pixs[i] = 0;
     }
-    
+
     //Closest to the camera: white snow caps
     else if (b > lowBound && b <= firstLayer) {
       fill(254, 254, 254);
       pixs[i] = 4;
     }
-    
+
     //Second closest to camera: rocky highlands
     else if (b > firstLayer && b <= secondLayer) {
       //fill(204,102,0);
       fill(255,0,0);
       pixs[i] = 3;
     }
-    
+
     //Thirdy closest to the camera: green forest
     else if (b > secondLayer && b <= thirdLayer) {
       //fill(100,100,0);
@@ -167,14 +167,14 @@ int[] colorHandler(float b, int i, int[] pixs){
       fill(0,0,255);
       pixs[i] = 1;
     }
-    
+
     return pixs;
 }
 
 
 //Used to calibrate position between kinect image and projection
 void keyPressed(){
-  //lowBound adjusts the boudary closer to the kinect.  
+  //lowBound adjusts the boudary closer to the kinect.
   //Increasing moves the boundary further from the camera.
   if(key == 'q'){
     lowBound += 1;
@@ -194,7 +194,7 @@ void keyPressed(){
     highBound -= 1;
     println("highBound = " + highBound);
   }
-  
+
   else if(key == 'e'){
     xMax += 1;
     println("xMax = " + xMax);
