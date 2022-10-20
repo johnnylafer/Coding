@@ -1,3 +1,7 @@
+//Taken from https://www.jeffreythompson.org/collision-detection/object_oriented_collision.php
+//full credit goes to jeffreythompson
+//modified to be persistent by johnnylr
+
 float px = 0;      // point position (move with mouse)
 float py = 0;
 

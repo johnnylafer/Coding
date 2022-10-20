@@ -15,6 +15,10 @@ import java.io.IOException;
 
 public class Bar_Collisions extends PApplet {
 
+//Taken from https://www.jeffreythompson.org/collision-detection/object_oriented_collision.php
+//full credit goes to jeffreythompson
+//added more rectangles
+
 float px = 0;      // point position (move with mouse)
 float py = 0;
 
