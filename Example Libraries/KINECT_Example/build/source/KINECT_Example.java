@@ -34,7 +34,7 @@ boolean mirror = false;
  //fullScreen();
   kinect = new Kinect(this);
   kinect.initDepth();
- // kinect.initVideo();
+  kinect.initVideo();
   //kinect.enableIR(ir);
   kinect.enableColorDepth(colorDepth);
 

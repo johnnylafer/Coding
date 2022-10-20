@@ -13,7 +13,7 @@
 import org.openkinect.processing.*;
 import processing.sound.*;
 
-Kinect kinect2;
+Kinect kinect;
 Scanner scanner;
 SoundFile soundfile2;
 SoundFile soundfile3;
@@ -69,10 +69,11 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
 void setup() {
   fullScreen(2);  //This sends the visual output to the second monitor, in this case the projector
   //size(512, 424);  //This is the number of pixels returend by the kinect by default
-  kinect2 = new Kinect(this);
+  kinect = new Kinect(this);
   scanner = new Scanner();
 
-  kinect2.initDepth();
+  kinect.initDepth();
+  kinect.initVideo();
 
   lastTime = millis();
   progStartTime = millis();
@@ -92,8 +93,8 @@ void draw() {
   //Have the Kinect look at what is in front of it
   //Then define that depth data as a 'brightness' at each pixel
   //Based on the brightness of the pixel, draw a rectangle at that location with the appropriate color
-  PImage img = kinect2.getDepthImage();
-  //image(img,0,0);  //enable to help align projector
+  PImage img = kinect.getVideoImage();
+  image(img,0,0);  //enable to help align projector
   int tempIndex = 0;
   for (int y = yMin; y < yMax; y += 1){
    for (int x = xMin; x < xMax; x += 1) {
@@ -114,6 +115,7 @@ void draw() {
     noStroke();
     rect(map(x,xMin,xMax,1920,0),map(y,yMin,yMax,0,1080),skip,skip);
     tempIndex++;
+    image(img,0,0);
    }
   }
 

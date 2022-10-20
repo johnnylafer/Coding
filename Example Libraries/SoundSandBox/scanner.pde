@@ -1,57 +1,57 @@
 class Scanner {
- 
+
   //variables
   int x;
   int y;
-  
+
   //constructor
   Scanner(){
     x = xMin;
     y = yMin;
-    
+
   }
-  
+
   //functions
-  
+
   void scan(){
     if(millis() - lastTime >= tempo){
       x++;
       lastTime = millis();
     }
     if(x > xMax){
-      x = xMin; 
+      x = xMin;
       clearEvents();
     }
   }
-  
+
   void display(){
     noStroke();
     fill(127,90);
     rect(map(x,xMin,xMax,1920,0),map(y,yMin,yMax,0,1080), 2*skip, (yMax-yMin)*skip);
   }
-  
 
-  
+
+
   void playEvents(){
     if(events[x - xMin] == 2){
       float rate = map(float(modifiers[x-xMin]),0.0,float(yMax-yMin),0.5,1.5);
-      soundfile2.play();
-      soundfile2.rate(rate);
+      //soundfile2.play();
+      //soundfile2.rate(rate);
     }
 
     if(events[x - xMin] == 3){
       float rate = map(float(modifiers[x-xMin]),0.0,float(yMax-yMin),0.5,1.5);
-      soundfile3.play();
-      soundfile3.rate(rate);
+      //soundfile3.play();
+    //  soundfile3.rate(rate);
     }
     if(events[x - xMin] == 4){
       float rate = map(float(modifiers[x-xMin]),0.0,float(yMax-yMin),0.5,1.5);
-      soundfile4.play();
-      soundfile4.rate(rate);
-      soundfile4.amp(.3);
-    }    
+    //  soundfile4.play();
+    //  soundfile4.rate(rate);
+    //  soundfile4.amp(.3);
+    }
   }
-  
+
   void checkEvents(){
     for(int i = 0; i < (yMax - yMin); i++){  //check all pixels in that column
 
@@ -62,7 +62,7 @@ class Scanner {
         for(int a = -radius*2; a < radius; a++){
           //println("x position is " + pixelX[x - xMin + i*(xMax-xMin)] + " and a value is " + a);
           if(events[pixelX[x - xMin + i*(xMax-xMin)]+ a] == 2){
-           otherEvents = true; 
+           otherEvents = true;
           }
         }
         //println(otherEvents);
@@ -98,7 +98,7 @@ class Scanner {
         boolean otherEvents = false;
         for(int a = -radius*2; a < radius; a++){
           if(events[pixelX[x - xMin + (i)*(xMax-xMin)]+ a] == 3){
-           otherEvents = true; 
+           otherEvents = true;
           }
         }
         //println(otherEvents);
@@ -134,7 +134,7 @@ class Scanner {
         boolean otherEvents = false;
         for(int a = -radius*2; a < radius; a++){
           if(events[pixelX[x - xMin + (i)*(xMax-xMin)]+ a] == 4){
-           otherEvents = true; 
+           otherEvents = true;
           }
         }
         //println(otherEvents);
@@ -164,7 +164,7 @@ class Scanner {
       }
     }
   }
-  
+
   void clearEvents(){
    for(int i = 0; i < events.length; i++){
      events[i] = 0;
@@ -173,6 +173,6 @@ class Scanner {
   void clearModifiers(){
    for(int i = 0; i < modifiers.length; i++){
      modifiers[i] = 0;
-      } 
+      }
   }
     }

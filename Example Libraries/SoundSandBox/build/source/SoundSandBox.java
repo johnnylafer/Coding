@@ -33,7 +33,7 @@ public class SoundSandBox extends PApplet {
 
 
 
-Kinect kinect2;
+Kinect kinect;
 Scanner scanner;
 SoundFile soundfile2;
 SoundFile soundfile3;
@@ -89,10 +89,11 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
  public void setup() {
   /* size commented out by preprocessor */;  //This sends the visual output to the second monitor, in this case the projector
   //size(512, 424);  //This is the number of pixels returend by the kinect by default
-  kinect2 = new Kinect(this);
+  kinect = new Kinect(this);
   scanner = new Scanner();
 
-  kinect2.initDepth();
+  kinect.initDepth();
+  kinect.initVideo();
 
   lastTime = millis();
   progStartTime = millis();
@@ -112,8 +113,8 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
   //Have the Kinect look at what is in front of it
   //Then define that depth data as a 'brightness' at each pixel
   //Based on the brightness of the pixel, draw a rectangle at that location with the appropriate color
-  PImage img = kinect2.getDepthImage();
-  //image(img,0,0);  //enable to help align projector
+  PImage img = kinect.getVideoImage();
+  image(img,0,0);  //enable to help align projector
   int tempIndex = 0;
   for (int y = yMin; y < yMax; y += 1){
    for (int x = xMin; x < xMax; x += 1) {
@@ -134,6 +135,7 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
     noStroke();
     rect(map(x,xMin,xMax,1920,0),map(y,yMin,yMax,0,1080),skip,skip);
     tempIndex++;
+    image(img,0,0);
    }
   }
 
@@ -249,59 +251,59 @@ int fourthLayer =lowBound + 4 * boundDelta/layerNumber;
   }
 }
 class Scanner {
- 
+
   //variables
   int x;
   int y;
-  
+
   //constructor
   Scanner(){
     x = xMin;
     y = yMin;
-    
+
   }
-  
+
   //functions
-  
+
    public void scan(){
     if(millis() - lastTime >= tempo){
       x++;
       lastTime = millis();
     }
     if(x > xMax){
-      x = xMin; 
+      x = xMin;
       clearEvents();
     }
   }
-  
+
    public void display(){
     noStroke();
     fill(127,90);
     rect(map(x,xMin,xMax,1920,0),map(y,yMin,yMax,0,1080), 2*skip, (yMax-yMin)*skip);
   }
-  
 
-  
+
+
    public void playEvents(){
     if(events[x - xMin] == 2){
       float rate = map(PApplet.parseFloat(modifiers[x-xMin]),0.0f,PApplet.parseFloat(yMax-yMin),0.5f,1.5f);
-      soundfile2.play();
-      soundfile2.rate(rate);
+      //soundfile2.play();
+      //soundfile2.rate(rate);
     }
 
     if(events[x - xMin] == 3){
       float rate = map(PApplet.parseFloat(modifiers[x-xMin]),0.0f,PApplet.parseFloat(yMax-yMin),0.5f,1.5f);
-      soundfile3.play();
-      soundfile3.rate(rate);
+      //soundfile3.play();
+    //  soundfile3.rate(rate);
     }
     if(events[x - xMin] == 4){
       float rate = map(PApplet.parseFloat(modifiers[x-xMin]),0.0f,PApplet.parseFloat(yMax-yMin),0.5f,1.5f);
-      soundfile4.play();
-      soundfile4.rate(rate);
-      soundfile4.amp(.3f);
-    }    
+    //  soundfile4.play();
+    //  soundfile4.rate(rate);
+    //  soundfile4.amp(.3);
+    }
   }
-  
+
    public void checkEvents(){
     for(int i = 0; i < (yMax - yMin); i++){  //check all pixels in that column
 
@@ -312,7 +314,7 @@ class Scanner {
         for(int a = -radius*2; a < radius; a++){
           //println("x position is " + pixelX[x - xMin + i*(xMax-xMin)] + " and a value is " + a);
           if(events[pixelX[x - xMin + i*(xMax-xMin)]+ a] == 2){
-           otherEvents = true; 
+           otherEvents = true;
           }
         }
         //println(otherEvents);
@@ -348,7 +350,7 @@ class Scanner {
         boolean otherEvents = false;
         for(int a = -radius*2; a < radius; a++){
           if(events[pixelX[x - xMin + (i)*(xMax-xMin)]+ a] == 3){
-           otherEvents = true; 
+           otherEvents = true;
           }
         }
         //println(otherEvents);
@@ -384,7 +386,7 @@ class Scanner {
         boolean otherEvents = false;
         for(int a = -radius*2; a < radius; a++){
           if(events[pixelX[x - xMin + (i)*(xMax-xMin)]+ a] == 4){
-           otherEvents = true; 
+           otherEvents = true;
           }
         }
         //println(otherEvents);
@@ -414,7 +416,7 @@ class Scanner {
       }
     }
   }
-  
+
    public void clearEvents(){
    for(int i = 0; i < events.length; i++){
      events[i] = 0;
@@ -423,7 +425,7 @@ class Scanner {
    public void clearModifiers(){
    for(int i = 0; i < modifiers.length; i++){
      modifiers[i] = 0;
-      } 
+      }
   }
     }
 
