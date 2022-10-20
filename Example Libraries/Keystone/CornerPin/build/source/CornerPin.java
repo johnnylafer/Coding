@@ -4,8 +4,6 @@ import processing.data.*;
 import processing.event.*;
 import processing.opengl.*;
 
-import deadpixel.keystone.*;
-
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.io.File;
@@ -14,8 +12,6 @@ import java.io.PrintWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
-
-public class CornerPin extends PApplet {
 
 /**
  * This is a simple example of how to use the Keystone library.
@@ -36,18 +32,18 @@ public class CornerPin extends PApplet {
  * many surfaces you want to map.
  */
 
-
+import deadpixel.<keystone.*;
 
 Keystone ks;
 CornerPinSurface surface;
 
 PGraphics offscreen;
 
- public void setup() {
+void setup() {
   // Keystone will only work with P3D or OPENGL renderers,
   // since it relies on texture mapping to deform
   //fullScreen(P3D);
-  /* size commented out by preprocessor */;
+  size(800, 600, P3D);
 
   ks = new Keystone(this);
   surface = ks.createCornerPinSurface(400, 300, 20);
@@ -60,7 +56,7 @@ PGraphics offscreen;
   offscreen = createGraphics(400, 300, P3D);
 }
 
- public void draw() {
+void draw() {
 
   // Convert the mouse coordinate into surface coordinates
   // this will allow you to use mouse events inside the
@@ -82,7 +78,7 @@ PGraphics offscreen;
   surface.render(offscreen);
 }
 
- public void keyPressed() {
+void keyPressed() {
   switch(key) {
   case 'c':
     // enter/leave calibration mode, where surfaces can be warped
@@ -102,15 +98,3 @@ PGraphics offscreen;
   }
 }
 
-
-  public void settings() { size(800, 600, P3D); }
-
-  static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "CornerPin" };
-    if (passedArgs != null) {
-      PApplet.main(concat(appletArgs, passedArgs));
-    } else {
-      PApplet.main(appletArgs);
-    }
-  }
-}

@@ -17,7 +17,7 @@
  * many surfaces you want to map.
  */
 
-import deadpixel.keystone.*;
+import deadpixel.<keystone.*;
 
 Keystone ks;
 CornerPinSurface surface;
