@@ -13,7 +13,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
-public class Bar_Collisions extends PApplet {
+public class Bar_Collisions_pers extends PApplet {
+
+//Taken from https://www.jeffreythompson.org/collision-detection/object_oriented_collision.php
+//full credit goes to jeffreythompson
+//modified to be persistent by johnnylr
 
 float px = 0;      // point position (move with mouse)
 float py = 0;
@@ -53,7 +57,7 @@ float sy6 = 0;
 float sw6 = 100;    // and dimensions
 float sh6 = 400;
 
-int h6;
+int h1,h2,h3,h4,h5,h6; //persistence variables --Johnny
 
  public void setup() {
   /* size commented out by preprocessor */;
@@ -74,55 +78,95 @@ int h6;
   // if hit, change rectangle color
   boolean hit = pointRect(px,py, sx,sy,sw,sh);
   if (hit) {
+    h1=2;
+    //fill(255,150,0);
+  }
+  else {
+    //h6=0;
+    //fill(0,150,255);
+  }
+  if (h1>1) {
     fill(255,150,0);
   }
   else {
     fill(0,150,255);
   }
   noStroke();
-  rect(sx,sy, sw,sh);
+    rect(sx,sy,sw,sh);
 //do the same for the rectangle 2 -johnny
     boolean hit2 = pointRect(px,py, sx2,sy2,sw2,sh2);
-  if (hit2) {
-    fill(255,150,0);
-  }
-  else {
-    fill(0,150,255);
-  }
-  noStroke();
-    rect(sx2,sy2,sw2,sh2);
+    if (hit2) {
+      h2=2;
+      //fill(255,150,0);
+    }
+    else {
+      //h6=0;
+      //fill(0,150,255);
+    }
+    if (h2>1) {
+      fill(255,150,0);
+    }
+    else {
+      fill(0,150,255);
+    }
+    noStroke();
+      rect(sx2,sy2,sw2,sh2);
 //same for rectangle 3 -johnny
         boolean hit3 = pointRect(px,py, sx3,sy3,sw3,sh3);
-  if (hit3) {
-    fill(255,150,0);
-  }
-  else {
-    fill(0,150,255);
-  }
-  noStroke();
-    rect(sx3,sy3,sw3,sh3);
+        if (hit3) {
+          h3=2;
+          //fill(255,150,0);
+        }
+        else {
+          //h6=0;
+          //fill(0,150,255);
+        }
+        if (h3>1) {
+          fill(255,150,0);
+        }
+        else {
+          fill(0,150,255);
+        }
+        noStroke();
+          rect(sx3,sy3,sw3,sh3);
 
     //same for rectangle 4 -johnny
         boolean hit4 = pointRect(px,py, sx4,sy4,sw4,sh4);
-  if (hit4) {
-    fill(255,150,0);
-  }
-  else {
-    fill(0,150,255);
-  }
-  noStroke();
-    rect(sx4,sy4,sw4,sh4);
+        if (hit4) {
+          h4=2;
+          //fill(255,150,0);
+        }
+        else {
+          //h6=0;
+          //fill(0,150,255);
+        }
+        if (h4>1) {
+          fill(255,150,0);
+        }
+        else {
+          fill(0,150,255);
+        }
+        noStroke();
+          rect(sx4,sy4,sw4,sh4);
 
         //same for rectangle 5 -johnny
         boolean hit5 = pointRect(px,py, sx5,sy5,sw5,sh5);
-  if (hit5) {
-    fill(255,150,0);
-  }
-  else {
-    fill(0,150,255);
-  }
-  noStroke();
-    rect(sx5,sy5,sw5,sh5);
+        if (hit5) {
+          h5=2;
+          //fill(255,150,0);
+        }
+        else {
+          //h6=0;
+          //fill(0,150,255);
+        }
+        if (h5>1) {
+          fill(255,150,0);
+        }
+        else {
+          fill(0,150,255);
+        }
+        noStroke();
+          rect(sx5,sy5,sw5,sh5);
 
             //same for rectangle 4 -johnny
         boolean hit6 = pointRect(px,py, sx6,sy6,sw6,sh6);
@@ -167,7 +211,7 @@ int h6;
   public void settings() { size(600, 400); }
 
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "Bar_Collisions" };
+    String[] appletArgs = new String[] { "Bar_Collisions_pers" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {
