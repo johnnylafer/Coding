@@ -42,6 +42,8 @@ float sh6 = 400;
 
 int h1,h2,h3,h4,h5,h6; //persistence variables --Johnny
 
+int r11,g11,b11,r12,g12,b12; //color variables rectangle 1
+
 void setup() {
   size(600,400);
   noCursor();
@@ -62,6 +64,7 @@ void draw() {
   boolean hit = pointRect(px,py, sx,sy,sw,sh);
   if (hit) {
     h1=2;
+
     //fill(255,150,0);
   }
   else {
@@ -69,10 +72,10 @@ void draw() {
     //fill(0,150,255);
   }
   if (h1>1) {
-    fill(255,150,0);
+    fill(r11,g11,b11);
   }
   else {
-    fill(0,150,255);
+    fill(r12,g12,b12);
   }
   noStroke();
     rect(sx,sy,sw,sh);
@@ -151,7 +154,7 @@ void draw() {
         noStroke();
           rect(sx5,sy5,sw5,sh5);
 
-            //same for rectangle 4 -johnny
+            //same for rectangle 6 -johnny
         boolean hit6 = pointRect(px,py, sx6,sy6,sw6,sh6);
   if (hit6) {
     h6=2;
