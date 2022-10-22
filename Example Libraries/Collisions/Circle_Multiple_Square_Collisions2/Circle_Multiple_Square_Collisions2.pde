@@ -28,7 +28,7 @@ void setup() {
 
 void generate(){
   for (i=0; i<rects.length; i++) {
-    println(i);
+    //println(i);
     float x = int(random(50,width-50)/50) * 50;
     float y = int(random(50,height-50)/50) * 50;
     rects[i] = new Rectangle(x,y, 50,50);
@@ -131,6 +131,8 @@ class Rectangle {
         }
          else if (hit && squares[dit] != 1){ //check if any other block than 1 is hit & if it is the first time
            squares[dit] = 1; //if it is the first time, write a 1 at the array position of the square
+           score=score+1;
+           println(score);
            //println(squares); // -
            fill(0,0,0);
            rect(x,y, w,h);
