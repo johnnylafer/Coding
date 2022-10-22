@@ -51,7 +51,17 @@ void setup() {
   strokeWeight(5);    // thicker stroke = easier to see
 }
 
+void random_bar_colors() { //this is where I will try to set up a random color generator
+  //THIS IS STILL HEAVILY WIP
+  //ONLY ADDED THE COLORS HERE FOR NOW
+  r11=255;
+  g11=150;
+  b11=0;
+  r12=0;
+  g12=155;
+  b12=255;
 
+}
 void draw() {
   background(255);
 
@@ -72,10 +82,10 @@ void draw() {
     //fill(0,150,255);
   }
   if (h1>1) {
-    fill(r11,g11,b11);
+    fill(255,150,0);
   }
   else {
-    fill(r12,g12,b12);
+    fill(0,150,255);
   }
   noStroke();
     rect(sx,sy,sw,sh);
