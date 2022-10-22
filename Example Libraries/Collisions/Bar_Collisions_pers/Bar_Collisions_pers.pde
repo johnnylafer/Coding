@@ -1,6 +1,8 @@
 //Taken from https://www.jeffreythompson.org/collision-detection/object_oriented_collision.php
 //full credit goes to jeffreythompson
 //modified to be persistent by johnnylr
+//I should probably rewrite this whole thing to use arrays because right now it is a mess
+//with arrays it should be easier to modify
 
 float px = 0;      // point position (move with mouse)
 float py = 0;
@@ -73,7 +75,7 @@ void draw() {
   // if hit, change rectangle color
   boolean hit = pointRect(px,py, sx,sy,sw,sh);
   if (hit) {
-    h1=2;
+    h1=1;
 
     //fill(255,150,0);
   }
@@ -81,7 +83,7 @@ void draw() {
     //h6=0;
     //fill(0,150,255);
   }
-  if (h1>1) {
+  if (h1==1) {
     fill(255,150,0);
   }
   else {
@@ -92,14 +94,14 @@ void draw() {
 //do the same for the rectangle 2 -johnny
     boolean hit2 = pointRect(px,py, sx2,sy2,sw2,sh2);
     if (hit2) {
-      h2=2;
+      h2=1;
       //fill(255,150,0);
     }
     else {
       //h6=0;
       //fill(0,150,255);
     }
-    if (h2>1) {
+    if (h2==1) {
       fill(255,150,0);
     }
     else {
@@ -110,14 +112,14 @@ void draw() {
 //same for rectangle 3 -johnny
         boolean hit3 = pointRect(px,py, sx3,sy3,sw3,sh3);
         if (hit3) {
-          h3=2;
+          h3=1;
           //fill(255,150,0);
         }
         else {
           //h6=0;
           //fill(0,150,255);
         }
-        if (h3>1) {
+        if (h3==1) {
           fill(255,150,0);
         }
         else {
@@ -129,14 +131,14 @@ void draw() {
     //same for rectangle 4 -johnny
         boolean hit4 = pointRect(px,py, sx4,sy4,sw4,sh4);
         if (hit4) {
-          h4=2;
+          h4=1;
           //fill(255,150,0);
         }
         else {
           //h6=0;
           //fill(0,150,255);
         }
-        if (h4>1) {
+        if (h4==1) {
           fill(255,150,0);
         }
         else {
@@ -148,14 +150,14 @@ void draw() {
         //same for rectangle 5 -johnny
         boolean hit5 = pointRect(px,py, sx5,sy5,sw5,sh5);
         if (hit5) {
-          h5=2;
+          h5=1;
           //fill(255,150,0);
         }
         else {
           //h6=0;
           //fill(0,150,255);
         }
-        if (h5>1) {
+        if (h5==1) {
           fill(255,150,0);
         }
         else {
@@ -167,14 +169,14 @@ void draw() {
             //same for rectangle 6 -johnny
         boolean hit6 = pointRect(px,py, sx6,sy6,sw6,sh6);
   if (hit6) {
-    h6=2;
+    h6=1;
     //fill(255,150,0);
   }
   else {
     //h6=0;
     //fill(0,150,255);
   }
-  if (h6>1) {
+  if (h6==1) {
     fill(255,150,0);
   }
   else {
@@ -182,6 +184,15 @@ void draw() {
   }
   noStroke();
     rect(sx6,sy6,sw6,sh6);
+
+if (h1+h2+h3+h4+h5+h6==6) { //reset the screen to be able to fill the bars again
+  h1 = 0;
+  h2 = 0;
+  h3 = 0;
+  h4 = 0;
+  h5 = 0;
+  h6 = 0;
+}
 
 
   // draw the point
