@@ -216,8 +216,8 @@ class Circle {
 
     for (int i = 0; i < fingers.getNumFingers(); i++) {
       PVector position = fingers.getFinger(i);
-      x = position.x;
-      y = position.y;
+      x = position.x-5; //I don't know why the -5 is here but they had it in the example and I guess it
+      y = position.y-5; //makes it more accurate
     }
 
 
