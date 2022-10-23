@@ -53,7 +53,7 @@ class KinectTracker {
         int rawDepth = depth[offset];
 
         // Testing against threshold
-        if (rawDepth < threshold && rawDepth > threshold+20) {
+        if (rawDepth < threshold) {
           sumX += x;
           sumY += y;
           count++;
@@ -94,7 +94,7 @@ class KinectTracker {
         // Raw depth
         int rawDepth = depth[offset];
         int pix = x + y * display.width;
-        if (rawDepth < threshold && rawDepth > threshold+20) {
+        if (rawDepth < threshold) {
           // A red color instead
           display.pixels[pix] = color(150, 50, 50);
         } else {
@@ -105,20 +105,14 @@ class KinectTracker {
     display.updatePixels();
 
     // Draw the image
-    //choose here if you want the scaled or unscaled version
-    image(display, 0, 0,640*scale,480*scale); //scaled
-    //image(display, 0, 0); //not scaled
-
-  //  display.resize(1920,1080);
+    image(display, 0, 0,kinect.width*scale,kinect.height*scale);
   }
 
   int getThreshold() {
     return threshold;
-
   }
 
   void setThreshold(int t) {
     threshold =  t;
-    print(threshold);
   }
 }
