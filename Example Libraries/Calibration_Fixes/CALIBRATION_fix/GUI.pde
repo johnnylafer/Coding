@@ -9,23 +9,23 @@ PVector guiPos;
 void setupGui() {
   cp5 = new ControlP5(this);
   cp5.setFont(createFont("Courier", 16));
-  
-  guiPos = new PVector(depthWidth+90, 60);
+
+  guiPos = new PVector(kinect.width+90, 60);
   
   guiCpos = cp5.addSlider2D("chessPosition")
       .setLabel("Chessboard Position")
       .setPosition(guiPos.x, guiPos.y+15)
       .setSize(400, 360)
       .setArrayValue(new float[]{0, 0});
-  
+
   guiCwidth = cp5.addSlider("cwidth")
      .setPosition(guiPos.x, guiPos.y+420)
      .setHeight(30)
      .setWidth(345)
      .setRange(5, 800)
      .setValue(100)
-     .setLabel("Size"); 
-  
+     .setLabel("Size");
+
   guiSearching = cp5.addToggle("isSearchingBoard")
      .setPosition(guiPos.x, guiPos.y+470)
      .setSize(125, 32)
@@ -43,7 +43,7 @@ void setupGui() {
      .setSize(105, 32)
      .setLabel("Clear")
      .hide();
-  
+
   guiCalibrate = cp5.addButton("calibrate")
      .setPosition(guiPos.x, guiPos.y+600)
      .setSize(105, 32)
@@ -54,12 +54,12 @@ void setupGui() {
      .setSize(105, 32)
      .setLabel("Save")
      .hide();
-     
+
   guiLoad = cp5.addButton("loadC")
      .setPosition(guiPos.x+300, guiPos.y+600)
      .setSize(105, 32)
-     .setLabel("Load");  
-     
+     .setLabel("Load");
+
   guiTesting = cp5.addRadioButton("mode")
       .setPosition(35, 30)
       .setSize(80, 50)
@@ -74,7 +74,7 @@ void controlEvent(ControlEvent theControlEvent) {
     if (theControlEvent.isFrom("chessPosition")) {
       cx = (int) map(guiCpos.getArrayValue()[0], 0, 100, 0, pWidth);
       cy = (int) map(guiCpos.getArrayValue()[1], 0, 100, 0, pHeight);
-    }  
+    }
   } catch(Exception e) {
     println(e);
   }
