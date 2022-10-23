@@ -3,9 +3,8 @@
 //please remember to install the fingertracker library first
 
 // import the fingertracker library
-// and the SimpleOpenNI library for Kinect access  //rewrote this to
 import fingertracker.*;
-//import SimpleOpenNI.*;
+//import OpenKinect libraries;
 import org.openkinect.freenect.*;
 import org.openkinect.processing.*;
 
@@ -14,7 +13,7 @@ import org.openkinect.processing.*;
 FingerTracker fingers;
 Kinect kinect;
 // set a default threshold distance:
-// 625 corresponds to about 2-3 feet from the Kinect
+// 625 corresponds to about 2-3 feet from the Kinect  //2-3 feet equals 0,6096 m - 0,9144 m --Johnny
 int threshold = 625;
 
 //Game related code START
@@ -29,6 +28,9 @@ public int dit; //display iteration variable
 
 int[] squares= new int[20]; //array to check if any square has already been hovered over
 //Game related code END
+
+//add an enabler or disabler for the image
+boolean showimg;
 
 void setup() {
   size(640, 480);
@@ -80,7 +82,9 @@ void draw() {
   //kinect.update();
   // get a depth image and display it
   PImage depthImage = kinect.getDepthImage();
+  if (showimg = true){
   image(depthImage, 0, 0);
+  }
 
   // update the depth threshold beyond which
   // we'll look for fingers
@@ -166,5 +170,13 @@ void keyPressed(){
 
   if(key == 'y'){
     threshold += 10;
+  }
+
+  if(key == 'c'){
+    showimg = true;
+  }
+
+  if(key == 'v'){
+    showimg = false;
   }
 }
