@@ -38,6 +38,7 @@ Potentially this can be expanded to include a timer or something else.
 
 #### Issues
 - Tracking kind of jumpy and inaccurate
+- Do something with the score, right now it just gets printed to the console.
 
 #### Functions
 - Jumpy tracking enables a lot of different points (multiple hands?) to be used at the same time
