@@ -31,10 +31,10 @@ public class CALIBRATION_fix extends PApplet {
 //==========================================================
 // set resolution of your projector image/second monitor
 // and name of your calibration file-to-be
-int pWidth = 1024;
-int pHeight = 768;
-//int depthWidth = 640;
-//int depthHeight = 480;
+int pWidth = 1280;
+int pHeight = 720;
+int depthWidth = 240;
+int depthHeight = 320;
 
 String calibFilename = "calibration.txt";
 
@@ -76,7 +76,7 @@ int cx, cy, cwidth;
   //kinect.kinect.enableIR();
   kinect.initVideo();
   //kinect.alternativeViewPointDepthToImage();
-  opencv = new OpenCV(this, kinect.width, kinect.height);
+  opencv = new OpenCV(this, depthWidth, depthHeight);
 
   // matching pairs
   ptsK = new ArrayList<PVector>();
@@ -141,7 +141,7 @@ int cx, cy, cwidth;
   // draw GUI
   pushMatrix();
   pushStyle();
-  translate(kinect.width+70, 40);
+  translate(depthWidth+70, 40);
   fill(0);
   rect(0, 0, 450, 680);
   fill(255);
@@ -183,7 +183,7 @@ int cx, cy, cwidth;
 }
 
  public PVector getDepthMapAt(int x, int y) {
-  PVector dm = depthMap[1 * y + x];
+  PVector dm = depthMap[depthWidth * y + x];
   return new PVector(dm.x, dm.y, dm.z);
 }
 
@@ -205,9 +205,9 @@ int cx, cy, cwidth;
 
  public void mousePressed() {
   if (calibrated && testingMode) {
-    testPoint = new PVector(constrain(mouseX-30, 0, kinect.width-1),
-                            constrain(mouseY-120, 0, kinect.height-1));
-    int idx = kinect.width * (int) testPoint.y + (int) testPoint.x;
+    testPoint = new PVector(constrain(mouseX-30, 0, depthWidth-1),
+                            constrain(mouseY-120, 0, depthHeight-1));
+    int idx = depthWidth * (int) testPoint.y + (int) testPoint.x;
     testPointP = convertKinectToProjector(depthMap[idx]);
   }
 }
@@ -291,8 +291,8 @@ PVector guiPos;
   cp5 = new ControlP5(this);
   cp5.setFont(createFont("Courier", 16));
 
-  guiPos = new PVector(kinect.width+90, 60);
-  
+  guiPos = new PVector(depthWidth+90, 60);
+
   guiCpos = cp5.addSlider2D("chessPosition")
       .setLabel("Chessboard Position")
       .setPosition(guiPos.x, guiPos.y+15)

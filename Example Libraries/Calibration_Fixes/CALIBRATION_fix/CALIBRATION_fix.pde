@@ -1,10 +1,10 @@
 //==========================================================
 // set resolution of your projector image/second monitor
 // and name of your calibration file-to-be
-int pWidth = 1024;
-int pHeight = 768;
-//int depthWidth = 640;
-//int depthHeight = 480;
+int pWidth = 1280;
+int pHeight = 720;
+int depthWidth = 320;
+int depthHeight = 240;
 
 String calibFilename = "calibration.txt";
 
@@ -46,7 +46,7 @@ void setup()
   //kinect.kinect.enableIR();
   kinect.initVideo();
   //kinect.alternativeViewPointDepthToImage();
-  opencv = new OpenCV(this, kinect.width, kinect.height);
+  opencv = new OpenCV(this, depthWidth, depthHeight);
 
   // matching pairs
   ptsK = new ArrayList<PVector>();
@@ -111,7 +111,7 @@ void drawGui()
   // draw GUI
   pushMatrix();
   pushStyle();
-  translate(kinect.width+70, 40);
+  translate(depthWidth+70, 40);
   fill(0);
   rect(0, 0, 450, 680);
   fill(255);
@@ -153,7 +153,7 @@ void addPointPair() {
 }
 
 PVector getDepthMapAt(int x, int y) {
-  PVector dm = depthMap[1 * y + x];
+  PVector dm = depthMap[depthWidth * y + x];
   return new PVector(dm.x, dm.y, dm.z);
 }
 
@@ -175,9 +175,9 @@ void loadC() {
 
 void mousePressed() {
   if (calibrated && testingMode) {
-    testPoint = new PVector(constrain(mouseX-30, 0, kinect.width-1),
-                            constrain(mouseY-120, 0, kinect.height-1));
-    int idx = kinect.width * (int) testPoint.y + (int) testPoint.x;
+    testPoint = new PVector(constrain(mouseX-30, 0, depthWidth-1),
+                            constrain(mouseY-120, 0, depthHeight-1));
+    int idx = depthWidth * (int) testPoint.y + (int) testPoint.x;
     testPointP = convertKinectToProjector(depthMap[idx]);
   }
 }
