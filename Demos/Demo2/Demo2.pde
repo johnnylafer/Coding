@@ -127,7 +127,7 @@ boolean circleRect(float cx, float cy, float radius, float rx, float ry, float r
   }
   return false;
 }
-//Game related code START
+//Game related code END
 
 // Adjust the threshold with key presses
 void keyPressed() {

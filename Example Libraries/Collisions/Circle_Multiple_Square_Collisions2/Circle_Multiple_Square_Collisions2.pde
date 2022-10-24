@@ -117,10 +117,9 @@ class Rectangle {
      else {
 
             //int rancol = random(0,r);
-       if (dit == 1) {
-         if (hit) {
+       if (dit == 1) { //check if it is the first tile
+         if (hit) { //if the first tile is hit do the following
            generate(); //if the different tile is hit regenerate a new playing field
-            for (int cs=1;cs < squares.length;cs++) { //for loop in order to set every single value in the array back to zero
             squares[cs] = 0; //reset the array to null
             }
          }

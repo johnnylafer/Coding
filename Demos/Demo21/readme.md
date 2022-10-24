@@ -52,10 +52,14 @@ This demo tracks your fingers and maps each of them to an ellipse, which is then
 ### Functions & Issues
 
 #### Issues/To-Do
-- Tracking kind of jumpy and inaccurate
+- Tracking kind of jumpy
 - Do something with the score, right now it just gets printed to the console.
+- Implement scaling of the kinect image
 
 #### Functions
 - Jumpy tracking enables a lot of different points (multiple hands?) to be used at the same time
 
 ### Credits
+- Daniel Shiffman for his OpenKinect Library and the Example
+- Bleikamp for the Fingertracker Library and example 
+- Jeffrey Thompson for the Object Collision example

@@ -9,25 +9,27 @@ import org.openkinect.freenect.*;
 import org.openkinect.processing.*;
 
 
-// declare FignerTracker and SimpleOpenNI objects
+// declare FignerTracker and OpenKinect objects
 FingerTracker fingers;
 Kinect kinect;
 // set a default threshold distance:
 // 625 corresponds to about 2-3 feet from the Kinect  //2-3 feet equals 0,6096 m - 0,9144 m --Johnny
 int threshold = 625;
 
+
 //Game related code START
-Circle circle;
+Circle circle; //declare circle class
 
 // a list of rectangles
-Rectangle[] rects = new Rectangle[20];
+Rectangle[] rects = new Rectangle[20]; //declaring rectangle array
 
-int score,gen,i;
+int score,gen,i; //declare score, generation and iteration variable
 
 public int dit; //display iteration variable
 
 int[] squares= new int[20]; //array to check if any square has already been hovered over
 //Game related code END
+
 
 //add an enabler or disabler for the image
 boolean showimg;
@@ -64,12 +66,12 @@ void setup() {
 
 
 //Game related code START
-void generate(){
-  for (i=0; i<rects.length; i++) {
+void generate(){ //this is where the squares actually get generated
+  for (i=0; i<rects.length; i++) { //for every position in the array of squares do the following
     //println(i);
-    float x = int(random(50,width-50)/50) * 50;
+    float x = int(random(50,width-50)/50) * 50; //match it to a grid with 50px
     float y = int(random(50,height-50)/50) * 50;
-    rects[i] = new Rectangle(x,y, 50,50);
+    rects[i] = new Rectangle(x,y, 50,50); //store the rectangles with a size of 50x50
      //I moved this from setup and added a delay in order to generate more squares as the game progresses - Johnny
   //Rectangle.circleRect = false;
 }
@@ -82,7 +84,7 @@ void draw() {
   //kinect.update();
   // get a depth image and display it
   PImage depthImage = kinect.getDepthImage();
-  if (showimg = true){
+  if (showimg = true){ //if the showimg is set to true
   image(depthImage, 0, 0);
   }
 
@@ -123,7 +125,7 @@ void draw() {
 
   // update circle’s position and draw
   circle.update();
-  circle.display();
+  circle.display(); 
   //Game related code END
 
 
