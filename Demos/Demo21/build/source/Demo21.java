@@ -146,7 +146,7 @@ boolean showimg;
 
   // update circle\u2019s position and draw
   circle.update();
-  circle.display(); 
+  circle.display();
   //Game related code END
 
 

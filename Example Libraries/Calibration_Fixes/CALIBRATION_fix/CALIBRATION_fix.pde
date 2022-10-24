@@ -153,7 +153,7 @@ void addPointPair() {
 }
 
 PVector getDepthMapAt(int x, int y) {
-  PVector dm = depthMap[kinect.width * y + x];
+  PVector dm = depthMap[1 * y + x];
   return new PVector(dm.x, dm.y, dm.z);
 }
 
