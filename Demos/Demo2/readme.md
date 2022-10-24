@@ -3,7 +3,7 @@
 Here you can find all of the information about the second demo
 
 ### Screenshots
-![alt text](/Demos/Demo21/Demo2.png)
+![alt text](/Demos/Demo2/Demo2.png)
 /Screenshot needs to be replaced/
 
 ### Quick Introduction
