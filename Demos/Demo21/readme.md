@@ -1,4 +1,4 @@
-# Demo 2.1 -
+# Demo 2.1 - Square Chaser
 
 Here you can find all of the information about the second version of the second demo
 
@@ -10,6 +10,7 @@ Here you can find all of the information about the second version of the second 
 This demo tracks your fingers and maps each of them to an ellipse, which is then checked for collisions on a random grid. The grid consists of two different square types: 19 "normal" Game squares you destroy in order to gain points and one regenerate Square you use to regenerate the playing field in order to collect new points all over again.
 - Potentially this can be expanded to include a timer or something else.
 - You can adjust the threshold of the tracking with the buttons ```x``` and ```y``` and turn the camera image on and off using ```c``` and ```v```
+
 ### Based on these Demos
 
 #### [FingerTrackerKinect](Example_Libraries/FingerTrackerKinect)
