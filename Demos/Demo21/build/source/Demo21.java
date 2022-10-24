@@ -35,7 +35,7 @@ FingerTracker fingers;
 Kinect kinect;
 // set a default threshold distance:
 // 625 corresponds to about 2-3 feet from the Kinect  //2-3 feet equals 0,6096 m - 0,9144 m --Johnny
-int threshold = 625;
+int threshold = 555;
 
 
 //Game related code START
@@ -73,7 +73,7 @@ boolean showimg;
   // making the finger tracking more robust
   // especially at short distances
   // farther away you may want a lower number
-  fingers.setMeltFactor(100);
+  fingers.setMeltFactor(80);
 
 
   //Game related code START
@@ -216,11 +216,11 @@ class Circle {
   // move into mouse position
    public void update() {
 
-    for (int i = 0; i < fingers.getNumFingers(); i++) {
-      PVector position = fingers.getFinger(i);
+    //for (int i = 0; i < fingers.getNumFingers(); i++) {
+      PVector position = fingers.getFinger(3);
       x = position.x-5; //I don't know why the -5 is here but they had it in the example and I guess it
       y = position.y-5; //makes it more accurate
-    }
+    //}
 
 
   }

@@ -69,10 +69,11 @@ void draw()
   //opencv.loadImage(kinect.irImage());
   opencv.gray();
 
-  if (isSearchingBoard)
+  if (isSearchingBoard) {
     foundPoints = opencv.findChessboardCorners(4, 3);
 
-  drawGui();
+   }
+drawGui();
 }
 
 void drawGui()

@@ -33,8 +33,8 @@ public class CALIBRATION_fix extends PApplet {
 // and name of your calibration file-to-be
 int pWidth = 1280;
 int pHeight = 720;
-int depthWidth = 240;
-int depthHeight = 320;
+int depthWidth = 320;
+int depthHeight = 240;
 
 String calibFilename = "calibration.txt";
 
@@ -99,10 +99,11 @@ int cx, cy, cwidth;
   //opencv.loadImage(kinect.irImage());
   opencv.gray();
 
-  if (isSearchingBoard)
+  if (isSearchingBoard) {
     foundPoints = opencv.findChessboardCorners(4, 3);
 
-  drawGui();
+   }
+drawGui();
 }
 
  public void drawGui()
