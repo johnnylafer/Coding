@@ -88,6 +88,7 @@ void draw() {
   image(depthImage, 0, 0);
   }
 
+
   // update the depth threshold beyond which
   // we'll look for fingers
   fingers.setThreshold(threshold);
