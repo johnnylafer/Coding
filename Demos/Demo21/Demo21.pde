@@ -125,7 +125,7 @@ void draw() {
 
   // update circle’s position and draw
   circle.update();
-  circle.display(); 
+  circle.display();
   //Game related code END
 
 
