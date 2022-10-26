@@ -34,8 +34,12 @@ int[] squares= new int[20]; //array to check if any square has already been hove
 //add an enabler or disabler for the image
 boolean showimg;
 
+float scalex; //float to scale the image on width
+float scaley; //float to scale the image on width
+
 void setup() {
   size(640, 480);
+
 
   // initialize your SimpleOpenNI object
   // and set it up to access the depth image
