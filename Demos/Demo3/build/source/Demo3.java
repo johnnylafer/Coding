@@ -4,6 +4,10 @@ import processing.data.*;
 import processing.event.*;
 import processing.opengl.*;
 
+import fingertracker.*;
+import org.openkinect.freenect.*;
+import org.openkinect.processing.*;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.io.File;
@@ -13,13 +17,28 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
-public class Bar_Collisions_pers extends PApplet {
+public class Demo3 extends PApplet {
 
 //Taken from https://www.jeffreythompson.org/collision-detection/object_oriented_collision.php
 //full credit goes to jeffreythompson
 //modified to be persistent by johnnylr
 //I should probably rewrite this whole thing to use arrays because right now it is a mess
 //with arrays it should be easier to modify
+
+// import the fingertracker library
+
+//import OpenKinect libraries;
+
+
+
+
+// declare FignerTracker and OpenKinect objects
+FingerTracker fingers;
+Kinect kinect;
+// set a default threshold distance:
+// 625 corresponds to about 2-3 feet from the Kinect  //2-3 feet equals 0,6096 m - 0,9144 m --Johnny
+int threshold = 555;
+
 
 float px = 0;      // point position (move with mouse)
 float py = 0;
@@ -63,11 +82,33 @@ int h1,h2,h3,h4,h5,h6; //persistence variables --Johnny
 
 int r11,g11,b11,r12,g12,b12; //color variables rectangle 1
 
+//add an enabler or disabler for the image
+boolean showimg;
+
+float scalex; //float to scale the image on width
+float scaley; //float to scale the image on width
+
  public void setup() {
+  scalex = 3; //3 for 1920
+  scaley = 2.25f;
+  //size(640, 480);
   /* size commented out by preprocessor */;
   noCursor();
 
   strokeWeight(5);    // thicker stroke = easier to see
+
+  kinect = new Kinect(this);
+  kinect.initDepth();
+  // initialize the FingerTracker object
+  // with the height and width of the Kinect
+  // depth image
+  fingers = new FingerTracker(this, 640, 480);
+
+  // the "melt factor" smooths out the contour
+  // making the finger tracking more robust
+  // especially at short distances
+  // farther away you may want a lower number
+  fingers.setMeltFactor(80);
 }
 
  public void random_bar_colors() { //this is where I will try to set up a random color generator
@@ -84,10 +125,49 @@ int r11,g11,b11,r12,g12,b12; //color variables rectangle 1
  public void draw() {
   background(255);
 
-  // update point to mouse coordinates
-  px = mouseX;
-  py = mouseY;
+  // get new depth data from the kinect
+  //kinect.update();
+  // get a depth image and display it
+  PImage depthImage = kinect.getDepthImage();
+  if (showimg = true){ //if the showimg is set to true
+  image(depthImage, 0, 0, kinect.width * scalex, kinect.height*scaley);
+  }
 
+
+  // update the depth threshold beyond which
+  // we'll look for fingers
+  fingers.setThreshold(threshold);
+
+  // access the "depth map" from the Kinect
+  // this is an array of ints with the full-resolution
+  // depth data (i.e. 500-2047 instead of 0-255)
+  // pass that data to our FingerTracker
+  int[] depthMap = kinect.getRawDepth();
+  fingers.update(depthMap);
+
+  // iterate over all the contours found
+  // and display each of them with a green line
+  stroke(0,255,0);
+  for (int k = 0; k < fingers.getNumContours(); k++) {
+    fingers.drawContour(k);
+  }
+
+  // iterate over all the fingers found
+  // and draw them as a red circle
+  noStroke();
+  fill(255,0,0);
+  for (int i = 0; i < fingers.getNumFingers(); i++) {
+    PVector position = fingers.getFinger(i);
+    ellipse(position.x*scalex - 5, position.y*scaley -5, 10, 10);
+  }
+
+
+// update point to mouse coordinates
+//for (int i = 0; i < fingers.getNumFingers(); i++) {
+  PVector position = fingers.getFinger(3);
+  px = position.x-5*scalex;
+  py = position.y-5*scalex;
+//}
   // check for collision
   // if hit, change rectangle color
   boolean hit = pointRect(px,py, sx,sy,sw,sh);
@@ -214,7 +294,7 @@ if (h1+h2+h3+h4+h5+h6==6) { //reset the screen to be able to fill the bars again
 
   // draw the point
   stroke(0);
-  point(px,py);
+  ellipse(px*scalex,py*scaley,50,50);
 }
 
 
@@ -232,10 +312,10 @@ if (h1+h2+h3+h4+h5+h6==6) { //reset the screen to be able to fill the bars again
 }
 
 
-  public void settings() { size(600, 400); }
+  public void settings() { fullScreen(2); }
 
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "Bar_Collisions_pers" };
+    String[] appletArgs = new String[] { "Demo3" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {
