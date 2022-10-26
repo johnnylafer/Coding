@@ -14,7 +14,7 @@ FingerTracker fingers;
 Kinect kinect;
 // set a default threshold distance:
 // 625 corresponds to about 2-3 feet from the Kinect  //2-3 feet equals 0,6096 m - 0,9144 m --Johnny
-int threshold = 625;
+int threshold = 555;
 
 
 //Game related code START
@@ -52,7 +52,7 @@ void setup() {
   // making the finger tracking more robust
   // especially at short distances
   // farther away you may want a lower number
-  fingers.setMeltFactor(100);
+  fingers.setMeltFactor(80);
 
 
   //Game related code START
@@ -87,6 +87,7 @@ void draw() {
   if (showimg = true){ //if the showimg is set to true
   image(depthImage, 0, 0);
   }
+
 
   // update the depth threshold beyond which
   // we'll look for fingers
