@@ -59,6 +59,9 @@ float scalex; //float to scale the image on width
 float scaley; //float to scale the image on width
 
  public void setup() {
+  scalex = 3; //3 for 1920
+  scaley = 2.25f;
+  //size(640, 480);
   /* size commented out by preprocessor */;
 
 
@@ -110,7 +113,7 @@ float scaley; //float to scale the image on width
   // get a depth image and display it
   PImage depthImage = kinect.getDepthImage();
   if (showimg = true){ //if the showimg is set to true
-  image(depthImage, 0, 0);
+  image(depthImage, 0, 0, kinect.width * scalex, kinect.height*scaley);
   }
 
 
@@ -138,7 +141,7 @@ float scaley; //float to scale the image on width
   fill(255,0,0);
   for (int i = 0; i < fingers.getNumFingers(); i++) {
     PVector position = fingers.getFinger(i);
-    ellipse(position.x - 5, position.y -5, 10, 10);
+    ellipse(position.x*scalex - 5, position.y*scaley -5, 10, 10);
   }
 
 
@@ -222,9 +225,9 @@ class Circle {
    public void update() {
 
     for (int i = 0; i < fingers.getNumFingers(); i++) {
-      PVector position = fingers.getFinger(i);
-      x = position.x-5; //I don't know why the -5 is here but they had it in the example and I guess it
-      y = position.y-5; //makes it more accurate
+      PVector position = fingers.getFinger(2);
+      x = position.x*scalex-5; //I don't know why the -5 is here but they had it in the example and I guess it
+      y = position.y*scaley-5; //makes it more accurate
     }
 
 
@@ -315,7 +318,7 @@ class Rectangle {
 }
 
 
-  public void settings() { size(640, 480); }
+  public void settings() { fullScreen(2); }
 
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Demo21" };

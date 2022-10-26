@@ -38,7 +38,10 @@ float scalex; //float to scale the image on width
 float scaley; //float to scale the image on width
 
 void setup() {
-  size(640, 480);
+  scalex = 3; //3 for 1920
+  scaley = 2.25;
+  //size(640, 480);
+  fullScreen(2);
 
 
   // initialize your SimpleOpenNI object
@@ -89,7 +92,7 @@ void draw() {
   // get a depth image and display it
   PImage depthImage = kinect.getDepthImage();
   if (showimg = true){ //if the showimg is set to true
-  image(depthImage, 0, 0);
+  image(depthImage, 0, 0, kinect.width * scalex, kinect.height*scaley);
   }
 
 
@@ -117,7 +120,7 @@ void draw() {
   fill(255,0,0);
   for (int i = 0; i < fingers.getNumFingers(); i++) {
     PVector position = fingers.getFinger(i);
-    ellipse(position.x - 5, position.y -5, 10, 10);
+    ellipse(position.x*scalex - 5, position.y*scaley -5, 10, 10);
   }
 
 
