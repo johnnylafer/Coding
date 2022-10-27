@@ -24,6 +24,10 @@ public int dit; //display iteration variable
 
 int[] squares= new int[20]; //array to check if any square has already been hovered over
 
+int[] ids = new int[0];
+
+int[] fids = new int[0];
+
 void setup() {
   size(600,400);
   dit = 1; //set display iteration variable to 1 (shouldn't be needed but does not work without)
@@ -37,6 +41,8 @@ void setup() {
     oscP5 = new OscP5(this, 32000);
 serverLocation = new NetAddress("192.168.0.50", 32100);
 //OSC Code END
+
+
   }
 
 
@@ -63,6 +69,16 @@ void draw() {
   // update circle’s position and draw
   circle.update();
   circle.display();
+
+  //println(ids);
+  for (int i = 0; i < ids.length; i++) {
+  if (!valueIsInArray(ids[i], fids)) {
+    fids = append(fids, ids[i]);
+  }
+  int blobAmount = fids.length; //IMPORTANT NOTICE: This is the blobAmount of all time, it does not reset!!
+  //println(blobAmount);
+}
+
 }
 
 
@@ -181,6 +197,8 @@ public void oscEvent(OscMessage message) {
       int wosc = message.get(4).intValue();
       int hosc = message.get(5).intValue();
 
+      ids = append(ids, id);
+
       id2 = id;
       x2= xosc;
       y2= yosc;
@@ -221,6 +239,16 @@ boolean circleRect(float cx, float cy, float radius, float rx, float ry, float r
   // if the distance is less than the radius, collision!
   if (distance <= radius) {
     return true;
+  }
+  return false;
+}
+
+
+boolean valueIsInArray(int v, int[] arr) {
+  for (int i = 0; i < arr.length; i++) {
+    if (v == arr[i]) {
+      return true;
+    }
   }
   return false;
 }
