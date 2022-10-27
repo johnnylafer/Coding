@@ -1,4 +1,4 @@
-<h1 align="center">osc-kinect-broadcaster</h1>
+<a href="https://github.com/chevalvert/osc-kinect-broadcaster"> <h1 align="center">osc-kinect-broadcaster</h1> </a>
 <h3 align="center">kinect blob tracking</a> via OSC</h3>
 <div align="center">
   <!-- License -->
