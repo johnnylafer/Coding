@@ -14,19 +14,21 @@ This demo tracks your fingers and maps each of them to an ellipse, which is then
 
 ### Based on these Demos
 
-#### [FingerTrackerKinect](Example_Libraries/FingerTrackerKinect)
-->This is the tracking mechanism this demo uses
+#### [Osc-Kinect-Broadcaster](Example_Libraries/osc-kinect-broadcaster)
+- In this demo you have to have both this example and the demo itself running for it to function. (Also check if the IPs correspond to the current ones in your osc settings in the demo and broadcaster)
+- This handles all of the backhand tracking and just sends the Blob id,x,y,width,height over OSC.
 
 #### [Circle_Multiple_Square_Collisions2](Example_Libraries/Circle_Multiple_Square_Collisions2)
-->This is the game backend the demo is based on
+->This is the game backend the demo is based on, including the rewritten changes
 ### Required libraries
 
-#### [FingerTracker](https://github.com/atduskgreg/FingerTracker)
-[needs to be installed maually!] <br>
-->This enables the finger tracking on top of the OpenKinect framework
+#### [Osc-Kinect-Broadcaster Libraries](https://github.com/atduskgreg/FingerTracker)
+[Not a library! Has a lot of dependencies though.] <br>
+[Needs to be run at the same time]
+- This enables the blob tracking on top of the OpenKinect framework
 
-#### [OpenKinect](Example_Libraries/FingerTrackerKinect)
-[remember to manually install .dylibs on (M1) Mac (through Homebrew) and libusbK drivers through Zadig on Windows] <br>
+#### [OSC Libraries](Example_Libraries/FingerTrackerKinect)
+[remember to manually adjust IPs to suit your network.] <br>
 ->This is the base integration we use in order to connect the Kinect to Processing.
 
 ### How to run
